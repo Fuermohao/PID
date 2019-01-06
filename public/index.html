@@ -1,17 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title>PID</title>
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but PID doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <script src="https://cdnjs.loli.net/ajax/libs/brython/3.6.2/brython.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+  <script src="https://unpkg.com/muse-ui/dist/muse-ui.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/muse-ui/dist/muse-ui.css">
+
+  <title>PID</title>
+  <style>
+    body {
+      overflow-x: hidden;
+      overflow-y: hidden;
+      height: 100%;
+      width: 100%;
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body onload="brython()">
+  <noscript>
+    <strong>We're sorry but PID doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+  </noscript>
+
+
+  <div id="app">
+    
+  </div>
+  <button id="calculator" style="display:none"></button>
+  <button id="init" style="display:none"></button>
+  <button id="updatePid" style="display:none"></button>
+  <!-- built files will be auto injected -->
+  <script src="./main.py" type="text/python"></script>
+  <script id="pid" type="text/python">
+  </script>
+</body>
+
 </html>
