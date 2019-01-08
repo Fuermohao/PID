@@ -22,10 +22,12 @@ MAX_FLOWIN = 2450000
 # 理论每秒水位最大上涨量 4900000/500/500=19.6px
 
 MAX_FLOWOUT = 800000
-TARGET = 300
+# TARGET = 300
 
-waterLev_t0 = 0
-waterLev_t = waterLev_t0
+lev_t0 = 0
+lev_t = lev_t0
+pointer = document.select('.target')[0].style
+txt = document.select('.target-txt')[0].style
 
 
 def flowin_speed():
@@ -63,84 +65,51 @@ def set_flowout_speed(speed):
     pass
 
 
+def mark_target(target):
+    if pointer.top != str(700-target)+"px":
+        pointer.top = str(700-target)+"px"
+        txt.top = str(680-target)+"px"
+
+
 def t0_status():
-    global waterLev_t
-    global waterLev_t0
+    global lev_t
+    global lev_t0
     waterLev = document.getElementById("waterLev")
     style_lev = waterLev.style
-    style_lev.height = str(waterLev_t0-5)+"px"
+    style_lev.height = str(lev_t0-5)+"px"
     style_lev.width = "100%"
     flowin4 = document.getElementById("flowin4")
     style_flowin = flowin4.style
-    style_flowin.height = str(CAN_HEIGHT-waterLev_t0)+"px"
-    
-# cur_bais = 0
-# pre_bais = 0
-# bais_sum = 0
-# target = 300
+    style_flowin.height = str(CAN_HEIGHT-lev_t0)+"px"
 
 
 def calculate():
     # 水位上涨量 流入-流出 / 底面积
-    # set_flowin_speed(10)
-    global waterLev_t
-    # global cur_bais
-    # global pre_bais
-    # global bais_sum
-    # global target
+    global lev_t
 
-    if waterLev_t <= 690 and waterLev_t >= 5:
-        waterLev_t += ((flowin_speed()/70)*MAX_FLOWIN -
-                       (flowout_speed()/40)*MAX_FLOWOUT)/500/500
+    if lev_t <= 690 and lev_t >= 5:
+        lev_t += ((flowin_speed()/70)*MAX_FLOWIN -
+                  (flowout_speed()/40)*MAX_FLOWOUT)/500/500
         waterLev = document.getElementById("waterLev")
         style_lev = waterLev.style
-        style_lev.height = str(waterLev_t-5)+"px"
+        style_lev.height = str(lev_t-5)+"px"
 
         flowin4 = document.getElementById("flowin4")
         style_flowin = flowin4.style
-        style_flowin.height = str(700-waterLev_t)+"px"
-    elif waterLev_t > 690:
-        waterLev_t = 690
-    elif waterLev_t < 5:
-        waterLev_t = 5
+        style_flowin.height = str(700-lev_t)+"px"
+    elif lev_t > 690:
+        lev_t = 690
+    elif lev_t < 5:
+        lev_t = 5
 
-    if waterLev_t < 50:
+    if lev_t < 50:
         flowout = document.getElementById("flowout").style
-        flowout.height = str(waterLev_t-5)+"px"
+        flowout.height = str(lev_t-5)+"px"
     try:
         scripts = document['pid'].html
-        # print(scripts)
         exec(scripts)
-        # set_flowin_speed(PID(value=waterLev_t))
     except:
         pass
-
-
-# def PID(kp=-16, ki=0.4, kd=2, value=100):
-#     global cur_bais
-#     global pre_bais
-#     global bais_sum
-#     global target
-
-#     cur_bais = value - target
-#     bais_sum += cur_bais
-#     if bais_sum >= 5:
-#         bais_sum = 5
-#     elif bais_sum <= -5:
-#         bais_sum = -5
-#     div_bais = cur_bais - pre_bais
-#     pre_bais = cur_bais
-#     print("kp: %s" % cur_bais)
-#     print("ki: %s" % ki*bais_sum)
-#     print("kd: %s" % str(kd*div_bais))
-#     print(kp*cur_bais+ki*bais_sum+kd*div_bais)
-#     result = kp*cur_bais+ki*bais_sum+kd*div_bais
-#     if 0 < result < 100:
-#         return result
-#     elif result < 0:
-#         return 0
-#     elif result > 100:
-#         return 100
 
 
 agent = document.getElementById('calculator').bind('click', calculate)

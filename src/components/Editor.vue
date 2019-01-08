@@ -2,17 +2,22 @@
   <div>
     <div ref="monaco-editor-container"
       class="monaco-editor-container"></div>
-    <mu-button @click="updatePid">Run</mu-button>
+    <mu-button @click="updatePid"
+      fab
+      color="success"
+      class="button">
+      <mu-icon value="play_arrow"></mu-icon>
+    </mu-button>
   </div>
 </template>
 
 <script>
 import * as monaco from "monaco-editor";
-import pid from "./pid"
+import pid from "./pid";
 // import debounce from "lodash/debounce";
 
 self.MonacoEnvironment = {
-  getWorkerUrl: function (moduleId, label) {
+  getWorkerUrl: function(moduleId, label) {
     if (label === "json") {
       return "./json.worker.bundle.js";
     }
@@ -37,7 +42,7 @@ export default {
       default: pid
     },
     theme: {
-      type: String,
+      type: String
       // default: "vs-dark"
     },
     showMinimap: {
@@ -100,7 +105,7 @@ export default {
     listen() {
       let that = this;
       if (this.syncInput) {
-        this.editor.onDidChangeModelContent(function () {
+        this.editor.onDidChangeModelContent(function() {
           that.buffer = that.editor.getValue();
           that.$emit("input", that.buffer);
         });
@@ -122,7 +127,12 @@ export default {
 <style scoped>
 .monaco-editor-container {
   min-height: 350px;
-  height: 90%;
+  height: 100%;
   width: 100%;
+}
+.button {
+  position: fixed;
+  top: 85vh;
+  right: 3vw;
 }
 </style>

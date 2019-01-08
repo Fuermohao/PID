@@ -19,9 +19,9 @@
 </template>
 
 <script>
-import SplitPane from "@/components/SplitPane"
-import Editor from "@/components/Editor"
-import Can from "@/components/Can"
+import SplitPane from "@/components/SplitPane";
+import Editor from "@/components/Editor";
+import Can from "@/components/Can";
 
 export default {
   components: {
@@ -29,16 +29,17 @@ export default {
     Editor,
     Can
   },
-  mounted: function () {
-    this.$nextTick(function () {
+  mounted: function() {
+    this.$nextTick(function() {
       // window.onresize = () => {
       //   return () => that.$refs.editor.layout();
       // }
-    })
-
-
-
-  }}
+    });
+  },
+  methods: {
+    
+  }
+};
 </script>
 
 <style scoped>
