@@ -1,13 +1,9 @@
-from browser import document, html
+from browser import document, timer
 
-# flowin1 = document.getElementById("flowin1").style
-# flowin2 = document.getElementById("flowin2").style
-# flowin3 = document.getElementById("flowin3").style
-# flowin4 = document.getElementById("flowin4").style
-# waterLev = document.getElementById("waterLev").style
-CAN_HEIGHT = 700
-CAN_WIDTH = 500
-CAN_S = 500*500
+# 容器尺寸
+CAN_HEIGHT = 700 # 高
+CAN_WIDTH = 500 # 宽
+CAN_S = 500*500 # 底面积
 
 SPEED = 1000  # 恒定 1000px/s  1px/ms 50px/50ms
 
@@ -18,14 +14,15 @@ MAX_FLOWIN = 2450000
 #
 # 每秒最大流出量 1000x40x40 = 1600000
 # 每50ms最大流出量 50x40x40 = 800000
-
 # 理论每秒水位最大上涨量 4900000/500/500=19.6px
 
 MAX_FLOWOUT = 800000
-# TARGET = 300
 
+# 初始时刻的水位
 lev_t0 = 0
+# t时刻的水位
 lev_t = lev_t0
+# 目标值游标的两个dom元素
 pointer = document.select('.target')[0].style
 txt = document.select('.target-txt')[0].style
 
@@ -111,7 +108,6 @@ def calculate():
     except:
         pass
 
+t0_status()
+timer.set_interval(calculate, 50)
 
-agent = document.getElementById('calculator').bind('click', calculate)
-init = document.getElementById("init").bind('click', t0_status)
-init.click()

@@ -1,29 +1,11 @@
-# PID
+# PID水位调节模拟小实验 Demo
 
-## Project setup
-```
-npm install
-```
+本项目为1Z实验室的一次技术可行性尝试
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+![](./src/assets/PID.png)
 
-### Compiles and minifies for production
-```
-npm run build
-```
 
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## feature
+- 基于Web，可在线编码，锻炼自己的控制算法
+- 采用Python编程实现控制算法
+- 左侧视图能够实时模拟还原右侧用户所实现的算法
